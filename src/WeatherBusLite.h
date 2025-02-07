@@ -21,6 +21,12 @@ public:
     bool queryHumidity(float &humidity);
     bool queryPressure(float &pressure);
     bool queryAirQuality(float &airQuality);
+    bool queryUV(float &uv);
+    bool queryRainfall(float &rainfall);
+    bool queryWindSpeed(float &windSpeed);
+    bool queryWindDirection(float &windDirection);
+    bool queryCanopyTemperature(float &canopyTemperature);
+    bool queryCustom(char queryType, float &value);
 
 private:
     void sendQuery(const char* query);

@@ -46,7 +46,6 @@ bool WeatherBusLite::queryTemp(float &temperature) {
     return parseResponse('T', temperature);
 }
 
-
 /**
  * Query humidity sensor.
  * 
@@ -70,20 +69,7 @@ bool WeatherBusLite::queryHumidity(float &humidity) {
  */
 bool WeatherBusLite::queryPressure(float &pressure) {
     sendQuery("?P");
-    return parseResponse('P', humidity);
-}
-
-/**
- * Query UV sensor.
- * 
- * Queries the UV sensor and returns the UV index.
- * 
- * @param pressure UV index
- * @return True if query was successful, false otherwise
- */
-bool WeatherBusLite::queryUV(float &UV) {
-    sendQuery("?U");
-    return parseResponse('U', humidity);
+    return parseResponse('P', pressure);
 }
 
 /**
@@ -91,12 +77,92 @@ bool WeatherBusLite::queryUV(float &UV) {
  * 
  * Queries the air quality sensor and returns the air quality index.
  * 
- * @param pressure Air quality index
+ * @param airQuality Air quality index
  * @return True if query was successful, false otherwise
  */
 bool WeatherBusLite::queryAirQuality(float &airQuality) {
     sendQuery("?A");
-    return parseResponse('A', humidity);
+    return parseResponse('A', airQuality);
+}
+
+/**
+ * Query UV sensor.
+ * 
+ * Queries the UV sensor and returns the UV index.
+ * 
+ * @param UV UV index
+ * @return True if query was successful, false otherwise
+ */
+bool WeatherBusLite::queryUV(float &UV) {
+    sendQuery("?U");
+    return parseResponse('U', UV);
+}
+
+/**
+ * Query rainfall sensor.
+ * 
+ * Queries the rainfall sensor and returns the cumulative rainfall since the last time it was queried in mm.
+ * 
+ * @param rainfall Rainfall in mm
+ * @return True if query was successful, false otherwise
+ */
+bool WeatherBusLite::queryRainfall(float &rainfall) {
+    sendQuery("?R");
+    return parseResponse('R', rainfall);
+}
+
+/**
+ * Query wind speed sensor.
+ * 
+ * Queries the wind speed sensor and returns the wind speed in m/s.
+ * 
+ * @param windSpeed Wind speed in m/s
+ * @return True if query was successful, false otherwise
+ */
+bool WeatherBusLite::queryWindSpeed(float &windSpeed) {
+    sendQuery("?W");
+    return parseResponse('W', windSpeed);
+}
+
+/**
+ * Query wind direction sensor.
+ * 
+ * Queries the wind direction sensor and returns the wind direction in degrees.
+ * 
+ * @param windDirection Wind direction in degrees
+ * @return True if query was successful, false otherwise
+ */
+bool WeatherBusLite::queryWindDirection(float &windDirection) {
+    sendQuery("?D");
+    return parseResponse('D', windDirection);
+}
+
+/**
+ * Query canopy temperature sensor.
+ * 
+ * Queries the canopy temperature sensor and returns the canopy temperature in degrees Celsius.
+ * 
+ * @param canopyTemperature Canopy temperature in degrees Celsius
+ * @return True if query was successful, false otherwise
+ */
+bool WeatherBusLite::queryCanopyTemperature(float &canopyTemperature) {
+    sendQuery("?C");
+    return parseResponse('C', canopyTemperature);
+}
+
+/**
+ * Run a custom query.
+ * 
+ * Run a custom query and return the value.
+ * 
+ * @param queryType The type of query to run
+ * @param value The value of the query
+ * @return True if query was successful, false otherwise
+ */
+bool WeatherBusLite::queryCustom(char queryType, float &value) {
+    char query[3] = {'?', queryType, '\0'};
+    sendQuery(query);
+    return parseResponse(queryType, value);
 }
 
 /**
