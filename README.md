@@ -1,5 +1,5 @@
 # WeatherBus Lite
-A super simple telemetry protocol for IoTweather monitoring systems!
+A super simple telemetry protocol for IoT weather monitoring systems!
 
 ## What it can do
 - Supports simple query-response communication
